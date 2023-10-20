@@ -2,7 +2,7 @@
   "id": "pf2e-award-xp",
   "title": "Award XP",
   "description": "Award XP to characters in the party sheet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": {
     "minimum": "10",
     "verified": "11"
