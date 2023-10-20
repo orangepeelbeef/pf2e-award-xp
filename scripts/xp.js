@@ -1,29 +1,24 @@
 "use strict";
 
 Hooks.once("init", function() {
-    CONFIG.debug.hooks = true;
     console.log("Initialized pf2e-award-xp")
 });
 
-Hooks.on("renderPartySheetPF2e", async (actor_directory, html, data) => {
+Hooks.on("renderPartySheetPF2e", async (party_sheet, html, data) => {
     if (!game.user.isGM)
         return
-    console.log("Attempting to render pf2e-award-xp input box")
-    const awardButton = $(`<label for="pf2e-award-xp-value">XP:<input type="text" id="pf2e-award-xp-value" name="pf2e-award-xp-value"><button>Grant XP</button>`)
-    html.find(".sheet.party [data-tab=overview] .summary").append((awardButton))
-    awardButton.click((event) => {award_xp()})
+    const awardButton = $(`<label for="pf2e-award-xp-value">XP:<input type="text" id="pf2e-award-xp-value" name="pf2e-award-xp-value"><button id="grant-xp-button">Grant XP</button>`)
+    html.find("div.content").append((awardButton))
+    $("#grant-xp-button").click((event) => {award_xp(html)})
     }
 );
 
-function award_xp() {
+function award_xp(html) {
+    html = html[0]
     const xp_to_award = parseInt(html.querySelector("#pf2e-award-xp-value").value)
     const party_members = game.actors.party.members
-    console.log("Attempting to add XP to party members")
     party_members.forEach(pc => {
-        pc.new_xp = pc.xp + xp_to_award
-        const update_data = {}
-        update_data[xp] = pc.new_xp
-        pc.actor.update(update_data)
+        const new_xp = parseInt(pc.system.details.xp.value) + parseInt(xp_to_award)
+        pc.update({"system.details.xp.value": new_xp});
     })
 }
-
