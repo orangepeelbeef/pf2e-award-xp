@@ -1,5 +1,9 @@
 "use strict";
 
+Hooks.once("init", function() {
+    CONFIG.debug.hooks = true;
+    console.log("Initialized pf2e-award-xp")
+});
 
 Hooks.on("renderPartySheetPF2e", async (actor_directory, html, data) => {
     if (!game.user.isGM)
@@ -8,7 +12,7 @@ Hooks.on("renderPartySheetPF2e", async (actor_directory, html, data) => {
     html.find(".sheet.party [data-tab=overview] .summary").append((awardButton))
     awardButton.click((event) => {award_xp()})
     }
-)
+);
 
 function award_xp() {
     const xp_to_award = parseInt(html.querySelector("#pf2e-award-xp-value").value)
