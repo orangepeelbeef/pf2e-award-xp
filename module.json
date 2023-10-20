@@ -14,5 +14,8 @@
   ],
   "scripts": [
     "scripts/xp.js"
-  ]
+  ],
+  "url": "https://github.com/orangepeelbeef/pf2e-award-xp",
+  "manifest": "https://raw.githubusercontent.com/orangepeelbeef/pf2e-award-xp/main/module.json",
+  "download": "https://github.com/orangepeelbeef/pf2e-award-xp/archive/refs/tags/v0.0.1.zip"
 }
